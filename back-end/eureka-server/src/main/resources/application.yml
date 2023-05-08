@@ -1,0 +1,23 @@
+server:
+  port: 9990
+
+spring:
+  application:
+    name: eureka-server
+eureka:
+  instance:
+    prefer-ip-address: true
+    status-page-url-path: /actuator/info
+    health-check-url-path: /actuator/health
+    instance-id: localhost:${server.port}
+    appname: ${deploy.servicename}
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: http://localhost:9990/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+    response-cache-update-interval-ms: 30000
+    response-cache-auto-expiration-in-seconds: 180
+    eviction-interval-timer-in-ms: 30000

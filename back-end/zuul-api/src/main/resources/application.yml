@@ -1,0 +1,52 @@
+#服务器配置
+server:
+  port: 9993
+
+logging:
+  level:
+    root: info
+  #file:
+    #name: C:\\Users\\ZZ02X6672\\Desktop\\bandmix\\Log\\zuul.log
+
+#服务器发现注册配置
+eureka:
+  client:
+    serviceUrl:
+      #配置服务中心(可配置多个,用逗号隔开)
+      defaultZone: http://localhost:9990/eureka
+
+#spring配置
+spring:
+  application:
+    name: api-gateway
+
+#API网关配置
+zuul:
+  routes:
+    auth:
+      path: /auth/**
+      sensitiveHeaders: "*"
+      serviceId:  OAUTH-API
+    user:
+      path: /user-api/v1.0/**
+      sensitiveHeaders: "*"
+      serviceId: USER-API
+    bandmix:
+      path: /bandmix-api/v1.0/**
+      sensitiveHeaders: "*"
+      serviceId: BANDMIX-API
+    mail: 
+      path: /mail-api/v1.0/**
+      sensitiveHeaders: "*"
+      serviceId: MAIL-API
+
+
+  add-proxy-headers: true
+  sensitive-headers: Access-Control-Allow-Origin
+  ignored-headers: Access-Control-Allow-Origin,H-APP-Id,Token,APPToken
+  host:
+    connect-timeout-millis: 300000
+    socket-timeout-millis: 300000
+ribbon:
+  ReadTimeout: 300000
+  ConnectTimeout: 300000

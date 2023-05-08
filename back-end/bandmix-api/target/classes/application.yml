@@ -1,0 +1,74 @@
+server:
+  port: 9995
+
+  logging:
+  level:
+    root: info
+  #file:
+    #name: C:\\Users\\ZZ02X6672\\Desktop\\bandmix\\Log\\bandmix.log
+
+spring:
+  application:
+    name: bandmix-api
+  datasource:
+    url: jdbc:mysql://localhost:3306/futuredb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=UTC&useSSL=true
+    username: root
+    password: 123456
+    platform: mysql
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+  mail:
+    host: smtp.qq.com
+    username: 1226411741@qq.com
+    password: llppzhcvgmdbhgcc
+    protocol: smtp
+    default-encoding: UTF-8
+    port: 465
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+          auth: true
+          starttls:
+          enable: true
+          required: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9990/eureka/
+      instance:
+        prefer-ip-address: true
+    registry-fetch-interval-seconds: 10
+
+feign:
+  hystrix:
+    enabled: true
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:9993/auth/users/current
+      id: bandmix-api
+      prefer-token-info: false
+    client:
+      id: client
+      client-secret: 123456
+      access-token-uri: http://localhost:9993/auth/oauth/token
+      grant-type: refresh_token,password
+      scope: server
+
+app:
+  mail:
+    subject: Password Reset succeeded!
+    body: Password Reset succeeded!New password is {0}

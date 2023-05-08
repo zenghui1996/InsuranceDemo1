@@ -1,0 +1,28 @@
+server:
+  port: 9991
+
+  logging:
+  level:
+    root: info
+  #file:
+    #name: C:\\Users\\ZZ02X6672\\Desktop\\bandmix\\Log\\oauth.log
+
+spring:
+  application:
+    name: oauth-api
+  datasource:
+    url: jdbc:mysql://localhost:3306/futuredb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=UTC&useSSL=true
+    username: root
+    password: 123456
+    platform: mysql
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9990/eureka/
